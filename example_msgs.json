@@ -1,0 +1,93 @@
+{
+    "$add_variable": {
+        "add_variable": {
+            "name": "block_height",
+            "variable": {
+                "reference": "execute_ctx.env.block.height"
+            }
+        }
+    },
+    "$add_query_variable": {
+        "add_variable": {
+            "name": "query_vfs",
+            "variable": {
+                "query": {
+                    "contract": {
+                        "raw": "osmo1nc5tatafv6eyq7llkr2gv50ff9e22mnf70qgjlv737ktmt4eswrqvlx82r"
+                    },
+                    "query": {
+                        "smart": {
+                            "msg": "eyJyZXNvbHZlX3BhdGgiOnsicGF0aCI6Im9zbW8xMnh4ZXk0ZW5rY2ZndjUyMmN4bDAzeG1rN3RkcG15Nmt5dDBzYXUifX0="
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "$evaluate_variable": {
+        "evaluate_variable": {
+            "name": "block_height",
+            "ctx": null
+        }
+    },
+    "$evaluate_custom_variable": {
+        "evaluate_custom_variable": {
+            "variable": {
+                "reference": "query_ctx.env.block.height"
+            },
+            "ctx": null
+        }
+    },
+    "$evaluate_custom_variable_smart_query": {
+        "evaluate_custom_variable": {
+            "variable": {
+                "query": {
+                    "contract": {
+                        "raw": "osmo1nc5tatafv6eyq7llkr2gv50ff9e22mnf70qgjlv737ktmt4eswrqvlx82r"
+                    },
+                    "query": {
+                        "smart": {
+                            "msg": "eyJyZXNvbHZlX3BhdGgiOnsicGF0aCI6Im9zbW8xMnh4ZXk0ZW5rY2ZndjUyMmN4bDAzeG1rN3RkcG15Nmt5dDBzYXUifX0="
+                        }
+                    }
+                }
+            },
+            "ctx": null
+        }
+    },
+    "$add_condition": {
+        "add_condition": {
+            "condition": {
+                "compare": "gt",
+                "left": {
+                    "expression": [
+                        "query_block_height",
+                        "+",
+                        "100"
+                    ]
+                },
+                "right": {
+                    "number": "6000"
+                }
+            }
+        }
+    },
+    "$evaluate_condition": {
+        "evaluate_condition": {
+            "condition": {
+                "compare": "gt",
+                "left": {
+                    "expression": [
+                        "query_block_height",
+                        "+",
+                        "100"
+                    ]
+                },
+                "right": {
+                    "number": "6000"
+                }
+            },
+            "ctx": null
+        }
+    }
+}
