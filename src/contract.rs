@@ -59,10 +59,11 @@ pub fn execute(
     msg: ExecuteMsg,
 ) -> Result<Response, ContractError> {
     let ctx = ExecuteContext::new(deps, info, env);
-    if let ExecuteMsg::AMPReceive(pkt) = msg {
-        ADOContract::default().execute_amp_receive(ctx, pkt, handle_execute)
-    } else {
-        handle_execute(ctx, msg)
+    match msg {
+        ExecuteMsg::AMPReceive(pkt) => {
+            ADOContract::default().execute_amp_receive(ctx, pkt, handle_execute)
+        }
+        _ => handle_execute(ctx, msg),
     }
 }
 

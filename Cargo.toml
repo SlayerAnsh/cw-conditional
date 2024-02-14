@@ -51,6 +51,6 @@ thiserror = { version = "1.0.31" }
 andromeda-std = { version = "0.1.0" }
 serde-json-wasm = "1.0.0"
 serde-cw-value = "0.7.0"
-
+cw-json = { git = "https://github.com/SlayerAnsh/cw-json.git" }
 [dev-dependencies]
 cw-multi-test = "0.16.2"

@@ -1,14 +1,12 @@
 use std::{collections::HashMap, str::from_utf8};
 
 use cosmwasm_std::{from_slice, Deps, Env, Int128, WasmQuery};
+use cw_json::JSON;
 use serde_cw_value::{to_value, Value};
 use serde_json_wasm::to_string;
 
 use crate::{
-    packages::{
-        eval::eval::{evaluate, Tokens},
-        json::json::JSON,
-    },
+    packages::eval::eval::{evaluate, Tokens},
     state::{CONDITION, VARIABLES},
     types::{
         Condition, ConditionCompare, ConditionCtx, ConditionWing, CurrentQueryCtx, ExternalQuery,
@@ -25,7 +23,7 @@ pub fn create_condition_ctx(env: Env, execute_ctx: Option<InwardExecuteCtx>) -> 
         execute_ctx: execute_ctx.clone(),
         query_ctx: CurrentQueryCtx { env: env },
     };
-    let mut ctx = JSON::from(to_value(ctx).unwrap());
+    let mut ctx = JSON::from_any(ctx);
 
     // Parse the msg binary to json so it can also be used for references
     match execute_ctx {
