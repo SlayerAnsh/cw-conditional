@@ -4,11 +4,11 @@ use cosmwasm_std::Int128;
 
 pub type Tokens = Vec<String>;
 
-fn precedence(op: &str) -> Int128 {
+fn precedence(op: &str) -> u32 {
     match op {
-        "+" | "-" => 1.into(),
-        "*" | "/" => 2.into(),
-        _ => 0.into(),
+        "+" | "-" => 1,
+        "*" | "/" => 2,
+        _ => 0,
     }
 }
 
@@ -21,17 +21,13 @@ fn apply_op(a: Int128, b: Int128, op: &str) -> Result<Int128, &'static str> {
     }
 }
 
-pub fn evaluate(
-    mut tokens: Tokens,
-    variables: &HashMap<&str, Int128>,
-) -> Result<Int128, &'static str> {
+pub fn evaluate(tokens: Tokens, variables: &HashMap<&str, Int128>) -> Result<Int128, &'static str> {
     let mut values = VecDeque::new();
     let mut ops = VecDeque::new();
 
     println!("TOKENS::{tokens:?}");
 
-    while let Some(token) = tokens.first().cloned() {
-        tokens = tokens[1..].to_vec();
+    for token in tokens {
         println!("OPS::{ops:?}");
         println!("VALUE::{values:?}");
         if let Ok(constant) = token.parse::<Int128>() {
@@ -50,8 +46,8 @@ pub fn evaluate(
                 values.push_back(apply_op(val1, val2, &top)?);
             }
         } else {
-            while let Some(top) = ops.back().clone() {
-                if top == "(" || precedence(&top) < precedence(&token) {
+            while let Some(top) = ops.back() {
+                if top == "(" || precedence(top) < precedence(&token) {
                     break;
                 }
                 if let Some(op) = ops.pop_back() {

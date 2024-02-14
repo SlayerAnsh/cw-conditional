@@ -47,6 +47,7 @@ pub fn evaluate_condition(deps: &Deps, ctx: &JSON, condition: Condition) -> bool
         ConditionWing::Number(v) => Some(Value::String(v.to_string())),
         ConditionWing::String(v) => Some(Value::String(v)),
         ConditionWing::Bool(v) => Some(Value::Bool(v)),
+        ConditionWing::Condition(c) => Some(Value::Bool(evaluate_condition(deps, ctx, *c))),
     }
     .unwrap();
     let left = match left.clone() {
@@ -59,6 +60,7 @@ pub fn evaluate_condition(deps: &Deps, ctx: &JSON, condition: Condition) -> bool
         ConditionWing::Number(v) => Some(Value::String(v.to_string())),
         ConditionWing::String(v) => Some(Value::String(v)),
         ConditionWing::Bool(v) => Some(Value::Bool(v)),
+        ConditionWing::Condition(c) => Some(Value::Bool(evaluate_condition(deps, ctx, *c))),
     }
     .unwrap();
     let right = match right.clone() {

@@ -57,6 +57,7 @@ pub enum ConditionWing {
     String(String),
     Expression(Tokens),
     Bool(bool),
+    Condition(Box<Condition>),
 }
 
 #[cw_serde]
